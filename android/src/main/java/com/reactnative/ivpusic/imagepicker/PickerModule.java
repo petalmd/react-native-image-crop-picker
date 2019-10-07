@@ -103,11 +103,8 @@ class PickerModule extends ReactContextBaseJavaModule implements ActivityEventLi
         this.reactContext = reactContext;
     }
 
-    private String getTmpDir(Activity activity) {
-        String tmpDir = activity.getCacheDir() + "/react-native-image-crop-picker";
-        new File(tmpDir).mkdir();
-
-        return tmpDir;
+    private File getTmpDir(Activity activity) {
+        return activity.getCacheDir();
     }
 
     @Override
@@ -159,7 +156,7 @@ class PickerModule extends ReactContextBaseJavaModule implements ActivityEventLi
         }
 
         try {
-            File file = new File(getTmpDir(activity));
+            File file = getTmpDir(activity);
             if (!file.exists()) throw new Exception("File does not exist");
 
             deleteRecursive(file);
@@ -759,7 +756,7 @@ class PickerModule extends ReactContextBaseJavaModule implements ActivityEventLi
     }
 
     private File getCameraOutputDir(Activity activity) {
-        File path = new File(getTmpDir(activity), "camera");
+        File path = getTmpDir(activity);
 
         if (!path.exists() && !path.isDirectory()) {
             path.mkdirs();
