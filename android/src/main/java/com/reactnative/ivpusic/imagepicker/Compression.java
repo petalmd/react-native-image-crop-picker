@@ -69,15 +69,12 @@ class Compression {
         return resizeImageFile;
     }
 
-    private String getTmpDir(Activity activity) {
-        String tmpDir = activity.getCacheDir() + "/react-native-image-crop-picker";
-        new File(tmpDir).mkdir();
-
-        return tmpDir;
+    private File getTmpDir(Activity activity) {
+        return activity.getCacheDir();
     }
 
     private File getImageOutputDir(Activity activity) {
-        File path = new File(getTmpDir(activity), "images");
+        File path = getTmpDir(activity);
 
         if (!path.exists() && !path.isDirectory()) {
             path.mkdirs();
