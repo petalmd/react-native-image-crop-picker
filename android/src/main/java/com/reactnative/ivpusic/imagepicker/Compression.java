@@ -77,13 +77,8 @@ class Compression {
     }
 
     private File getImageOutputDir(Activity activity) {
-        int status = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        File path;
-        if (status == PackageManager.PERMISSION_GRANTED) {
-            path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        } else {
-            path = new File(getTmpDir(activity), "images");
-        }
+        File path = new File(getTmpDir(activity), "images");
+
         if (!path.exists() && !path.isDirectory()) {
             path.mkdirs();
         }
