@@ -759,13 +759,8 @@ class PickerModule extends ReactContextBaseJavaModule implements ActivityEventLi
     }
 
     private File getCameraOutputDir(Activity activity) {
-        int status = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        File path;
-        if (status == PackageManager.PERMISSION_GRANTED) {
-            path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        } else {
-            path = new File(getTmpDir(activity), "camera");
-        }
+        File path = new File(getTmpDir(activity), "camera");
+
         if (!path.exists() && !path.isDirectory()) {
             path.mkdirs();
         }
